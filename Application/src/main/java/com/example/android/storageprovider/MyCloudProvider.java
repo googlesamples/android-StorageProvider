@@ -549,8 +549,11 @@ public class MyCloudProvider extends DocumentsProvider {
      * have a backend, so it simulates by reading content from the device's internal storage.
      */
     private void writeDummyFilesToStorage() {
-        if (mBaseDir.list().length > 0) {
-            return;
+        String[] list = mBaseDir.list();
+        if (list.length > 0) {
+            if (list.length > 1 || list[0].compareTo("instant-run") != 0) {
+                return;
+            }
         }
 
         int[] imageResIds = getResourceIdArray(R.array.image_res_ids);
